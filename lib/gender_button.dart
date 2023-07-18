@@ -1,3 +1,4 @@
+import 'package:bmi_calc/constants.dart';
 import 'package:flutter/material.dart';
 
 class GenderButton extends StatelessWidget {
@@ -20,7 +21,7 @@ class GenderButton extends StatelessWidget {
         ),
         Text(
           label.toUpperCase(),
-          style: const TextStyle(fontSize: 20.0),
+          style: kLabelTextStyle,
         ),
       ],
     );
