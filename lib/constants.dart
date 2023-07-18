@@ -15,8 +15,13 @@ const kNumberTextStyle = TextStyle(
   fontWeight: FontWeight.w900,
 );
 
+const kNumberVeryLargeTextStyle = TextStyle(
+  fontSize: 72.0,
+  fontWeight: FontWeight.w900,
+);
+
 const kLargeButtonTextStyle = TextStyle(
-  fontSize: 25.0,
+  fontSize: 20.0,
   fontWeight: FontWeight.bold,
 );
 
@@ -39,3 +44,5 @@ const kBMITextStyle = TextStyle(
 const kBodyTextStyle = TextStyle(
   fontSize: 22.0,
 );
+
+enum BMI { underweight, normal, overweight, obese, severelyObese }

@@ -1,7 +1,9 @@
+import 'package:bmi_calc/components/big_bottom_button.dart';
 import 'package:bmi_calc/calculator_brain.dart';
-import 'package:bmi_calc/gender_button.dart';
-import 'package:bmi_calc/result_page.dart';
-import 'package:bmi_calc/reusable_card.dart';
+import 'package:bmi_calc/components/circle_icon_button.dart';
+import 'package:bmi_calc/components/gender_button.dart';
+import 'package:bmi_calc/screens/result_page.dart';
+import 'package:bmi_calc/components/reusable_card.dart';
 import 'package:bmi_calc/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -151,7 +153,7 @@ class _InputPageState extends State<InputPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              CounterButton(
+                              CircleIconButton(
                                 onPress: () {
                                   setState(() {
                                     _weight--;
@@ -162,7 +164,7 @@ class _InputPageState extends State<InputPage> {
                               const SizedBox(
                                 width: 16,
                               ),
-                              CounterButton(
+                              CircleIconButton(
                                 onPress: () {
                                   setState(() {
                                     _weight++;
@@ -194,7 +196,7 @@ class _InputPageState extends State<InputPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              CounterButton(
+                              CircleIconButton(
                                 onPress: () {
                                   setState(() {
                                     _age--;
@@ -205,7 +207,7 @@ class _InputPageState extends State<InputPage> {
                               const SizedBox(
                                 width: 16,
                               ),
-                              CounterButton(
+                              CircleIconButton(
                                 onPress: () {
                                   setState(() {
                                     _age++;
@@ -222,59 +224,25 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                CalculatorBrain calculatorBrain =
-                    CalculatorBrain(height: _height, weight: _weight);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ResultPage(
-                      result: calculatorBrain.calculateBmi(),
-                      classification: calculatorBrain.classification(),
+            BigBottomButton(
+                label: 'calculate',
+                onPress: () {
+                  CalculatorBrain calculatorBrain =
+                      CalculatorBrain(height: _height, weight: _weight);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ResultPage(
+                        result: calculatorBrain.calculateBmi(),
+                        suggestion: calculatorBrain.getWords(),
+                        classification: calculatorBrain.classification(),
+                      ),
                     ),
-                  ),
-                );
-              },
-              child: Container(
-                color: kBottomContainerColor,
-                margin: const EdgeInsets.only(top: 8.0),
-                padding: const EdgeInsets.only(bottom: 8.0),
-                width: double.infinity,
-                height: kBottomContainerHeight,
-                child: const Center(
-                  child: Text(
-                    'Calculate',
-                    style: kLargeButtonTextStyle,
-                  ),
-                ),
-              ),
-            ),
+                  );
+                }),
           ],
         ),
       ),
-    );
-  }
-}
-
-class CounterButton extends StatelessWidget {
-  const CounterButton({super.key, required this.onPress, required this.icon});
-
-  final void Function()? onPress;
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      onPressed: onPress,
-      elevation: 0.0,
-      constraints: const BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
-      ),
-      shape: const CircleBorder(),
-      fillColor: const Color(0xFF4C4F5E),
-      child: Icon(icon),
     );
   }
 }

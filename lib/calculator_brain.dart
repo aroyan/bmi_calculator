@@ -1,10 +1,12 @@
 import 'dart:math';
 
+import 'package:bmi_calc/constants.dart';
+
 class CalculatorBrain {
   final double height;
   final double weight;
 
-  late double _bmi;
+  double _bmi = 0;
 
   CalculatorBrain({required this.height, required this.weight});
 
@@ -16,23 +18,47 @@ class CalculatorBrain {
 
   String classification() {
     if (_bmi < 18.5) {
-      return 'Underweight';
+      return BMI.underweight.name;
     }
 
     if (_bmi >= 18.5 && _bmi <= 24.9) {
-      return 'Normal';
+      return BMI.normal.name;
     }
 
     if (_bmi >= 25 && _bmi <= 29.9) {
-      return 'Overweight';
+      return BMI.overweight.name;
     }
 
     if (_bmi >= 30 && _bmi <= 34.9) {
-      return 'Obese';
+      return BMI.obese.name;
     }
 
     if (_bmi >= 35) {
-      return 'Severely obese';
+      return BMI.severelyObese.name;
+    }
+
+    return '';
+  }
+
+  String getWords() {
+    if (_bmi < 18.5) {
+      return 'You are underweight. You should eat more.';
+    }
+
+    if (_bmi >= 18.5 && _bmi <= 24.9) {
+      return 'You have a normal body weight. Good job!';
+    }
+
+    if (_bmi >= 25 && _bmi <= 29.9) {
+      return 'You are overweight. You should lose some weight.';
+    }
+
+    if (_bmi >= 30 && _bmi <= 34.9) {
+      return 'You are obese. You should lose a lot of weight.';
+    }
+
+    if (_bmi >= 35) {
+      return 'You are severely obese. You should seek medical help.';
     }
 
     return '';
